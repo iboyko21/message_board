@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Post{% endblock title %}
+
+{% block content %}
+<div class="container">
+
+    <div class="post-entry">
+        <h2>{{ object.title}}</h2>
+        <p>by {{object.author }} | {{ object.date }}</p>
+        <p>{{ object.body }}</p>
+    </div>
+    <p><a href="{% url 'post_edit' object.pk %}">Edit</a> |
+        <a href="{% url 'post_delete' object.pk %}">Delete</a>
+    </p>
+    <p>Back to <a href="{% url 'post_list' %}">All Posts</a>.</p>
+</div>
+{% endblock content %}

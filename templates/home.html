@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<br />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Social Media App</h1>
+        <p class="lead">A Social Media website built with Django.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'post_list' %}">View All Posts</a>
+        </p>
+    </div>
+</div>
+{% endblock content %}
