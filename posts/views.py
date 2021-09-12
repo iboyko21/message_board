@@ -4,13 +4,16 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Post
 
+
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post_list.html'
 
+
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'post_detail.html'
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -21,6 +24,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         obj = self.get_object()
         return obj.author == self.request.user
 
+
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
@@ -29,6 +33,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
