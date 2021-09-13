@@ -6,8 +6,10 @@
 <div class="container">
 
     <div class="post-entry">
-        <h2>{{ object.title}}</h2>
         <p>by {{object.author }} | {{ object.date }}</p>
+        {% if post.post_image %}
+        <p><img src="{{ post.post_image.url }}"></p>
+        {% endif %}
         <p>{{ object.body }}</p>
     </div>
     <p><a href="{% url 'post_edit' object.pk %}">Edit</a> |

@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255, null=False) # null=False means can't be empty field
+    post_image = models.ImageField(null=True, blank=True, upload_to="images/")
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(

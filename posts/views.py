@@ -1,3 +1,4 @@
+from posts.forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
@@ -18,7 +19,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post_edit.html'
-    fields = ["title", "body"]
+    fields = ['post_image','body']
 
     def test_func(self):
         obj = self.get_object()
@@ -38,7 +39,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['title', 'body']
+    fields = ['post_image','body']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
