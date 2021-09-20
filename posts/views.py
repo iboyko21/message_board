@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Comment, Post
+from .forms import CommentForm, PostForm
+from django.shortcuts import render, get_object_or_404
 
 
 class PostListView(LoginRequiredMixin, ListView):
@@ -10,7 +12,7 @@ class PostListView(LoginRequiredMixin, ListView):
     template_name = 'post_list.html'
 
 
-class PostDetailView(LoginRequiredMixin, DetailView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
 
@@ -38,8 +40,21 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['post_image','body']
+    #fields = ['post_image','body']
+    form_class = PostForm
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment_to_post.html'
+    success_url = reverse_lazy('post_list')
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
         form.instance.author = self.request.user
         return super().form_valid(form)

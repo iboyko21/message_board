@@ -5,16 +5,30 @@
 {% block content %}
 <div class="container">
 
-    <div class="post-entry">
-        <p>by {{object.author }} | {{ object.date }}</p>
+    <div class="card" style="border: 1px solid black; padding: 1rem;">
+        <p>by {{post.author }} | {{ post.date }}</p>
         {% if post.post_image %}
-        <p><img src="{{ post.post_image.url }}"></p>
+        <p><img src="{{ post.post_image.url }}" class="img-responsive" style="width: 400px; height: 300px"></p>
         {% endif %}
-        <p>{{ object.body }}</p>
-    </div>
-    <p><a href="{% url 'post_edit' object.pk %}">Edit</a> |
-        <a href="{% url 'post_delete' object.pk %}">Delete</a>
+        <p>{{ post.body }}</p>
+
+
+<h6>Comments:</h6>
+{% if not post.comments.all %}
+    No comments Yet...
+{% else %}
+    {% for comment in post.comments.all %}
+    <p>{{ comment.body }} - by {{ comment.author }} on {{ comment.date }}</p>
+    {% endfor %}
+{% endif %}    
+
+<hr>
+
+    <p> <a href="{% url 'add_comment_to_post' post.pk %}"> Comment</a> |
+        <a href="{% url 'post_edit' post.pk %}">Edit</a> |
+        <a href="{% url 'post_delete' post.pk %}">Delete</a>
     </p>
     <p>Back to <a href="{% url 'post_list' %}">All Posts</a>.</p>
+</div>
 </div>
 {% endblock content %}
