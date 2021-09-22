@@ -40,7 +40,7 @@
 
             <div class="card-footer text-center-muted">
                 <a href="{% url 'post_detail' post.pk %}">Details</a> |
-                <a href="{% url 'add_comment_to_post' post.pk %}">Comment</a>
+                <a href="{% url 'add_comment_to_post' post.pk %}">Add Comment</a>
                 ({{ post.comments.all.count }})
             </div>
         </div>

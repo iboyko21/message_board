@@ -5,30 +5,50 @@
 {% block content %}
 <div class="container">
 
-    <div class="card" style="border: 1px solid black; padding: 1rem;">
-        <p>by {{post.author }} | {{ post.date }}</p>
+    <div class="card" style="border: 1px solid black;">
+        <div class="card-header">
+
+            <div class="d-flex justify-content-between">
+                <div>
+                    by {{ post.author }} | {{ post.date }}
+                </div>
+                {% if user.is_authenticated and user == post.author  %}
+                <div>
+                    <a href="{% url 'post_edit' post.pk %}">Edit</a> | <a href="{% url 'post_delete' post.pk %}">Delete</a>
+                </div>
+                {% endif %}
+           
+            </div>
+        </div>
+
+        <div class="card-body">
         {% if post.post_image %}
+        
         <p><img src="{{ post.post_image.url }}" class="img-responsive" style="width: 400px; height: 300px"></p>
+
         {% endif %}
         <p>{{ post.body }}</p>
+        
+        
 
-
+<div class="card-body" style="border: .5px dashed black; border-radius: 5px; margin: 1rem;">
 <h6>Comments:</h6>
 {% if not post.comments.all %}
     No comments Yet...
 {% else %}
     {% for comment in post.comments.all %}
-    <p>{{ comment.body }} - by {{ comment.author }} on {{ comment.date }}</p>
+    <p><strong>{{ comment.author }}</strong> <span style="color:silver;">{{ comment.date }}</span><br>
+        {{ comment.body }} <br>
+        </p>
     {% endfor %}
-{% endif %}    
-
-<hr>
-
-    <p> <a href="{% url 'add_comment_to_post' post.pk %}"> Comment</a> |
-        <a href="{% url 'post_edit' post.pk %}">Edit</a> |
-        <a href="{% url 'post_delete' post.pk %}">Delete</a>
-    </p>
-    <p>Back to <a href="{% url 'post_list' %}">All Posts</a>.</p>
+{% endif %}  
+</div>  
 </div>
+
+        <div class="card-footer text-center-muted">
+            <a href="{% url 'post_list' %}">All Posts</a> |
+            <a href="{% url 'add_comment_to_post' post.pk %}">Add Comment</a>
+        </div>
+    </div>
 </div>
 {% endblock content %}
