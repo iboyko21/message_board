@@ -40,7 +40,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_new.html'
-    #fields = ['post_image','body']
     form_class = PostForm
 
     def form_valid(self, form):
@@ -52,9 +51,13 @@ class AddCommentView(CreateView):
     model = Comment
     form_class = CommentForm
     template_name = 'add_comment_to_post.html'
-    success_url = reverse_lazy('post_list')
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         form.instance.author = self.request.user
         return super().form_valid(form)
+        
+    def get_success_url(self):
+          id=self.kwargs['pk']
+          return reverse_lazy('post_detail', kwargs={'pk': id})
+    

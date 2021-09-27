@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Forgot your password?{% endblock title %}
 
@@ -8,7 +9,7 @@
     <p>Enter your email adddress below, and we'll email instructions for setting a new one.</p>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
         <button class="btn btn-success">Send me instructions</button>
     </form>
 </div>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}New Post{% endblock title %}
 
@@ -8,10 +9,12 @@
     <div class="page-header">
     <h1>New Post</h1>
     </div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ form | crispy }}
         {{ form.media }}
-        {{ form.as_p }}
+        <br>
         <button class="btn btn-success ml-2" type="submit">Post</button>
     </form>
 </div>

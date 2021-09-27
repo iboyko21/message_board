@@ -5,9 +5,8 @@
 {% block content %}
     {% for post in object_list %}
     <div class="container">
-        <div class="card" style="border: 1px solid black;">
+        <div class="card" style="border: 1px solid black; box-shadow: 5px 5px 5px rgb(92, 92, 92);">
             <div class="card-header">
-
 
                 <div class="d-flex justify-content-between">
                     <div>
@@ -15,10 +14,11 @@
                     </div>
                     {% if user.is_authenticated and user == post.author  %}
                     <div>
-                        <a href="{% url 'post_edit' post.pk %}">Edit</a> | <a href="{% url 'post_delete' post.pk %}">Delete</a>
+                        <a href="{% url 'post_edit' post.pk %}"><i class="fas fa-edit"></i></a> |
+                        <a href="{% url 'post_delete' post.pk %}"><i class="fas fa-trash-alt"></i></a>
                     </div>
                     {% endif %}
-               </div>
+                </div>
                </div>
            
             <div class="card-body">
@@ -27,16 +27,6 @@
                 {% endif %}
                 <p class="card-text">{{ post.body }}</p>
             </div>
-
-         <!-- {% if post.comments.all %}
-            <div class="card-body" style="border: .5px dashed black; border-radius: 5px; margin: 1rem;">
-                <h6>Comments</h6>
-                {% for comment in post.comments.all %}
-                    <p class="card-text"><u>{{ comment.author }}:</u> {{ comment.body }}</p>
-                 {% endfor %}
-            </div>
-            {% endif %} -->   
-
 
             <div class="card-footer text-center-muted">
                 <a href="{% url 'post_detail' post.pk %}">Details</a> |
