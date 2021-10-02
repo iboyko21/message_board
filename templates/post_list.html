@@ -5,12 +5,11 @@
 {% block content %}
     {% for post in object_list %}
     <div class="container">
-        <div class="card" style="border: 1px solid black; box-shadow: 5px 5px 5px rgb(92, 92, 92);">
+        <div class="card post-card">
             <div class="card-header">
-
                 <div class="d-flex justify-content-between">
                     <div>
-                        by {{ post.author }} | {{ post.date }}
+                        <i class="fas fa-user-circle"></i><strong> {{ post.author }} </strong>| {{ post.date }}
                     </div>
                     {% if user.is_authenticated and user == post.author  %}
                     <div>
@@ -18,23 +17,34 @@
                         <a href="{% url 'post_delete' post.pk %}"><i class="fas fa-trash-alt"></i></a>
                     </div>
                     {% endif %}
-                </div>
+                    </div>
                </div>
            
             <div class="card-body">
                 {% if post.post_image %}
-                <p><img src="{{ post.post_image.url }}" class="img-responsive" style="width: 200px; height: 200px" /></p>
+                <p><img src="{{ post.post_image.url }}" class="img-responsive" style="max-width: 30em;"></p>
                 {% endif %}
                 <p class="card-text">{{ post.body }}</p>
+                <hr>
+                <p><strong>Comments:</strong> ({{ post.comments.all.count }})</p>
+                
             </div>
+            
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+           
+                <div class="card-text">
+                    <a class="btn btn-primary" href="{% url 'post_detail' post.pk %}">Details</a> 
+                </div>
 
-            <div class="card-footer text-center-muted">
-                <a href="{% url 'post_detail' post.pk %}">Details</a> |
-                <a href="{% url 'add_comment_to_post' post.pk %}">Add Comment</a>
-                ({{ post.comments.all.count }})
+                <div class="card-text">
+                    <i class="far fa-smile"></i> {{ post.likes.all.count }} 
+                </div>
             </div>
         </div>
+        </div>
     </div>
-    <br />
+    <br/>
+    <br/>
     {% endfor %}
 {% endblock content %}

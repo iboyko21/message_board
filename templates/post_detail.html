@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="container" style="margin-bottom: 5rem;">
-    <div class="card" style="border: 1px solid black; box-shadow: 5px 5px 5px rgb(92, 92, 92);">
+    <div class="card post-card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    by {{ post.author }} @ {{ post.date }}
+                    <i class="fas fa-user-circle"></i> {{ post.author }} | {{ post.date }}
                 </div>
                 {% if user.is_authenticated and user == post.author  %}
                 <div>
@@ -22,7 +22,7 @@
 
         <div class="card-body">
         {% if post.post_image %}
-        <p><img src="{{ post.post_image.url }}" class="img-responsive" style="width: 400px; height: 300px"></p>
+        <p><img src="{{ post.post_image.url }}" class="img-responsive" style="max-width: 100%;"></p>
         {% endif %}
         <p>{{ post.body }}</p>
         
@@ -32,8 +32,8 @@
     No comments Yet...
 {% else %}
     {% for comment in post.comments.all %}
-    <div style="border: .5px solid black; margin:.5rem; border-radius: 5px; background-color: rgb(233, 233, 233); padding: .5rem; padding-bottom: 0;">
-    <p><strong>{{ comment.author }}</strong> <span style="color:rgb(160, 159, 159);"> {{ comment.date }} </span><br>
+    <div class="comment-box">
+    <p><strong>{{ comment.author }}</strong> <span class="text-fade"> {{ comment.date }} </span><br>
         {{ comment.body }} <br>
         </p>
         </div>
@@ -42,10 +42,28 @@
 </div>  
 </div>
 
-        <div class="card-footer text-center-muted">
-            <a href="{% url 'post_list' %}">All Posts</a> |
-            <a href="{% url 'add_comment_to_post' post.pk %}">Add Comment</a>
+<div class="card-footer">
+    <div class="d-flex justify-content-between">
+        <div>
+            <a class="btn btn-primary" href="{% url 'post_list' %}">Back</a> 
+            <a class="btn btn-success" href="{% url 'add_comment_to_post' post.pk %}">Add Comment</a>
         </div>
+        <div>
+            <form action="{% url 'like_post' post.pk %}" method="POST">
+                {% csrf_token %}
+
+                {% if liked %}
+                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger">
+                    Unlike <i class="far fa-frown"></i></button>
+                {% else %}
+                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-success">
+                    Like <i class="far fa-smile"></i></button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
     </div>
 </div>
 {% endblock content %}
