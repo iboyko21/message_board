@@ -2,11 +2,6 @@ body {
     background-color: silver;
 }
 
-.hr {
-    width: 80%;
-    height: 5px;
-    text-align: center;
-}
 .fa-edit {
     color: black;
 }
@@ -22,7 +17,7 @@ body {
 
 .post-card {
     border: 1px solid black; 
-    box-shadow: -5px 5px 4px rgb(90, 90, 90);
+    box-shadow: -5px 5px 4px rgb(0, 0, 0);
 }
 
 .comment-box {
@@ -61,10 +56,6 @@ body {
     background-color: rgb(230, 230, 230);
     padding: 1rem;
     max-width: 40rem;
-}
-.btn {
-    color: white;
-    text-decoration: none;
 }
 
 .login {
