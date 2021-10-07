@@ -20,22 +20,6 @@ class Post(models.Model):
         return reverse('post_detail', args=[str(self.id)])
 
 
-"""
-     LIKE_CHOICES = (
-    ('Like', 'Like'),
-    ('Unlike', 'Unlike'),
-)
-
-class Like(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
-
-    def __str__(self):
-        return str(self.post)
-"""
-
-
 class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
     body = models.TextField()

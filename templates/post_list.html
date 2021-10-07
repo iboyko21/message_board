@@ -26,22 +26,21 @@
                 {% endif %}
                 <p class="card-text">{{ post.body }}</p>
                 <hr>
-                <p><strong>Comments:</strong> ({{ post.comments.all.count }})</p>
+                <p><strong>Comments:</strong> ({{ post.comments.all.count }})</p>                  
                 
             </div>
             
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
-           
                 <div class="card-text">
                     <a class="btn btn-primary" href="{% url 'post_detail' post.pk %}">Details</a> 
                 </div>
-
                 <div class="card-text">
                     <i class="far fa-smile"></i> {{ post.likes.all.count }} 
                 </div>
             </div>
         </div>
+
         </div>
     </div>
     <br/>
