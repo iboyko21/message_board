@@ -1,1 +1,2 @@
-reminder: python src/quickstart.py
+
+web: gunicorn config.wsgi --log-file -

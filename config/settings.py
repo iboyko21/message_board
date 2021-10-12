@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-=@c#2315leoy#@pm+&d&^vipgwoh@b@5r*4hu23@^-1t$-1npo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "thawing-sierra-74202.herokuapp.com"]
 
 
 # Application definition
@@ -130,6 +130,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
