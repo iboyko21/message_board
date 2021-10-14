@@ -15,7 +15,7 @@
             <p><a class="btn btn-primary btn-lg" href="{% url 'post_list' %}">Continue</a></p>
         </p>
         {% else %}
-        <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Register</a> To Continue</p>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a> or <a class="btn btn-primary btn-lg" href="{% url 'signup' %}">Register</a> To Continue</p>
     </div>
 </div>
 {% endif %}
