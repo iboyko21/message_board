@@ -75,11 +75,11 @@ body {
     
 }
 
-.navbar-nav{
-    
+*{
+    text-align: center;
 }
 
-.nav-login{
-   
+.dropdown-menu{
+    margin-left: 22rem;
 }
 
