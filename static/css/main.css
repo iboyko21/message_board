@@ -72,12 +72,9 @@ body {
 .navbar{
     background-color: black;
     margin-bottom: 2rem;
-    
-}
-
-*{
     text-align: center;
 }
+
 
 .dropdown-menu{
     margin-left: 22rem;
