@@ -6,8 +6,10 @@
 <br />
 <div class="container" style="text-align: center;">
     <div class="jumbotron" >
-        <h1 class="display-4">Social Media App</h1>
-        <img src="/static/images/Logo.png" style="width:800px; height:400px; border-radius: 10px; border: 1px solid black; margin-bottom: 1rem;">
+        <h1 class="display-4">Message Board App</h1>
+        <p></p>
+        
+    <p><img class="mainlogo" src="/static/images/Logo.png" /></p>
     <br>
         {% if user.is_authenticated %}
         <p class="lead">
@@ -15,7 +17,8 @@
             <p><a class="btn btn-primary btn-lg" href="{% url 'post_list' %}">Continue</a></p>
         </p>
         {% else %}
-        <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a> or <a class="btn btn-primary btn-lg" href="{% url 'signup' %}">Register</a> To Continue</p>
+        <p><b>To Continue</b></p>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a> or <a class="btn btn-primary btn-lg" href="{% url 'signup' %}">Register</a></p>
     </div>
 </div>
 {% endif %}
